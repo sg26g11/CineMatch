@@ -17,6 +17,9 @@ app.set('views', __dirname + '/app/server/views');
 app.set('view engine', 'jade');
 app.locals.pretty = true;
 
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+
 app.use(busboy());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -28,7 +31,7 @@ app.use(express.static(__dirname + '/app/public'));
 
 require('./app/server/router')(app);
 
-var server = http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(server_port, function(){
 	console.log("Express server listening on port " + app.get('port'));
 })
 
