@@ -1,0 +1,24 @@
+{
+  "name": "CineMatch",
+  "private": true,
+
+  "dependencies": {
+    "loadtest":"1.2.10",
+    "express": "3.20.2",
+    "jade": "0.27.7",
+    "mongodb": "1.4.35",
+    "moment": "1.7.2",
+    "stylus": "0.31.0",
+    "xml2js": "0.4.6",
+    "socket.io": "0.9.16",
+    "emailjs": "0.3.13",
+    "connect-busboy": "0.0.2",
+    "body-parser": "*",
+    "xss-filters": "1.1.1",
+    "lwip": "0.0.6"
+  },
+  "engines": {
+    "node": "0.10.36",
+    "npm": "1.1.65"
+  }
+}

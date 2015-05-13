@@ -1,0 +1,385 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files (x86)\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'nodeload' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.36
+4 verbose node symlink C:\Program Files (x86)\nodejs\\node.exe
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'nodeload', null ]
+7 verbose cache add name=undefined spec="nodeload" args=["nodeload",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'nodeload',
+8 verbose parsed url   path: 'nodeload',
+8 verbose parsed url   href: 'nodeload' }
+9 silly lockFile f6b3c70f-nodeload nodeload
+10 verbose lock nodeload C:\Users\Stephen\AppData\Roaming\npm-cache\f6b3c70f-nodeload.lock
+11 silly lockFile f6b3c70f-nodeload nodeload
+12 silly lockFile f6b3c70f-nodeload nodeload
+13 verbose addNamed [ 'nodeload', '' ]
+14 verbose addNamed [ null, '*' ]
+15 silly lockFile 5cd965c9-nodeload nodeload@
+16 verbose lock nodeload@ C:\Users\Stephen\AppData\Roaming\npm-cache\5cd965c9-nodeload.lock
+17 silly addNameRange { name: 'nodeload', range: '*', hasData: false }
+18 verbose request where is /nodeload
+19 verbose request registry https://registry.npmjs.org/
+20 verbose request id 181369d50fdd3e4b
+21 verbose url raw /nodeload
+22 verbose url resolving [ 'https://registry.npmjs.org/', './nodeload' ]
+23 verbose url resolved https://registry.npmjs.org/nodeload
+24 verbose request where is https://registry.npmjs.org/nodeload
+25 info trying registry request attempt 1 at 12:56:29
+26 verbose etag "2KCBW2AVSRO6PRNFKJAXRWF4R"
+27 http GET https://registry.npmjs.org/nodeload
+28 http 304 https://registry.npmjs.org/nodeload
+29 silly registry.get cb [ 304,
+29 silly registry.get   { date: 'Tue, 28 Apr 2015 11:56:29 GMT',
+29 silly registry.get     via: '1.1 varnish',
+29 silly registry.get     'last-modified': 'Tue, 28 Apr 2015 11:56:29 GMT',
+29 silly registry.get     'cache-control': 'max-age=60',
+29 silly registry.get     etag: '"2KCBW2AVSRO6PRNFKJAXRWF4R"',
+29 silly registry.get     age: '0',
+29 silly registry.get     connection: 'keep-alive',
+29 silly registry.get     'x-served-by': 'cache-lcy1125-LCY',
+29 silly registry.get     'x-cache': 'MISS',
+29 silly registry.get     'x-cache-hits': '0',
+29 silly registry.get     'x-timer': 'S1430222189.031998,VS0,VE160',
+29 silly registry.get     vary: 'Accept' } ]
+30 verbose etag https://registry.npmjs.org/nodeload from cache
+31 silly addNameRange number 2 { name: 'nodeload', range: '*', hasData: true }
+32 silly addNameRange versions [ 'nodeload', [ '0.2.0', '0.4.0' ] ]
+33 verbose addNamed [ 'nodeload', '0.4.0' ]
+34 verbose addNamed [ '0.4.0', '0.4.0' ]
+35 silly lockFile 6013f887-nodeload-0-4-0 nodeload@0.4.0
+36 verbose lock nodeload@0.4.0 C:\Users\Stephen\AppData\Roaming\npm-cache\6013f887-nodeload-0-4-0.lock
+37 silly lockFile 6013f887-nodeload-0-4-0 nodeload@0.4.0
+38 silly lockFile 6013f887-nodeload-0-4-0 nodeload@0.4.0
+39 silly lockFile 5cd965c9-nodeload nodeload@
+40 silly lockFile 5cd965c9-nodeload nodeload@
+41 silly resolved [ { name: 'nodeload',
+41 silly resolved     version: '0.4.0',
+41 silly resolved     description: 'Load testing library for node.js',
+41 silly resolved     keywords: [ 'testing', 'load testing', 'http' ],
+41 silly resolved     homepage: 'https://github.com/benschmaus/nodeload',
+41 silly resolved     engines: { node: '>=0.4' },
+41 silly resolved     contributors: [ [Object], [Object], [Object], [Object] ],
+41 silly resolved     bugs: { url: 'https://github.com/benschmaus/nodeload/issues' },
+41 silly resolved     repository: { type: 'git', url: 'git://github.com/benschmaus/nodeload.git' },
+41 silly resolved     main: './nodeload.js',
+41 silly resolved     bin: { 'nodeload.js': './nodeload.js', 'nl.js': './nl.js' },
+41 silly resolved     directories: { doc: './doc', lib: './lib', example: './examples' },
+41 silly resolved     scripts: { test: 'expresso', preinstall: 'make clean compile' },
+41 silly resolved     devDependencies: { expresso: '>=0.7.7' },
+41 silly resolved     dependencies: { optparse: '1.0.3' },
+41 silly resolved     licenses: [ [Object] ],
+41 silly resolved     _npmUser: { name: 'bschmaus', email: 'benjamin.schmaus@gmail.com' },
+41 silly resolved     _id: 'nodeload@0.4.0',
+41 silly resolved     optionalDependencies: {},
+41 silly resolved     _engineSupported: true,
+41 silly resolved     _npmVersion: '1.1.0-2',
+41 silly resolved     _nodeVersion: 'v0.7.2-pre',
+41 silly resolved     _defaultsLoaded: true,
+41 silly resolved     dist:
+41 silly resolved      { shasum: '79fa406f7166229459bebd7db621940416b676ec',
+41 silly resolved        tarball: 'http://registry.npmjs.org/nodeload/-/nodeload-0.4.0.tgz' },
+41 silly resolved     maintainers: [ [Object], [Object] ],
+41 silly resolved     _shasum: '79fa406f7166229459bebd7db621940416b676ec',
+41 silly resolved     _from: 'nodeload@',
+41 silly resolved     _resolved: 'https://registry.npmjs.org/nodeload/-/nodeload-0.4.0.tgz',
+41 silly resolved     readme: 'ERROR: No README data found!' } ]
+42 info install nodeload@0.4.0 into C:\Users\Stephen\Documents\Node\CineMatch
+43 info installOne nodeload@0.4.0
+44 verbose node_modules\nodeload unbuild
+45 info preuninstall nodeload@0.4.0
+46 info uninstall nodeload@0.4.0
+47 verbose true,C:\Users\Stephen\Documents\Node\CineMatch\node_modules,C:\Users\Stephen\Documents\Node\CineMatch\node_modules unbuild nodeload@0.4.0
+48 verbose C:\Users\Stephen\Documents\Node\CineMatch\node_modules\.bin,[object Object] binRoot
+49 info postuninstall nodeload@0.4.0
+50 verbose tar unpack C:\Users\Stephen\AppData\Roaming\npm-cache\nodeload\0.4.0\package.tgz
+51 silly lockFile d63f02c4--CineMatch-node-modules-nodeload tar://C:\Users\Stephen\Documents\Node\CineMatch\node_modules\nodeload
+52 verbose lock tar://C:\Users\Stephen\Documents\Node\CineMatch\node_modules\nodeload C:\Users\Stephen\AppData\Roaming\npm-cache\d63f02c4--CineMatch-node-modules-nodeload.lock
+53 silly lockFile f529e92d-cache-nodeload-0-4-0-package-tgz tar://C:\Users\Stephen\AppData\Roaming\npm-cache\nodeload\0.4.0\package.tgz
+54 verbose lock tar://C:\Users\Stephen\AppData\Roaming\npm-cache\nodeload\0.4.0\package.tgz C:\Users\Stephen\AppData\Roaming\npm-cache\f529e92d-cache-nodeload-0-4-0-package-tgz.lock
+55 silly gunzTarPerm modes [ '777', '666' ]
+56 silly gunzTarPerm extractEntry .gitmodules
+57 silly gunzTarPerm modified mode [ '.gitmodules', 420, 438 ]
+58 silly gunzTarPerm extractEntry .npmignore
+59 silly gunzTarPerm modified mode [ '.npmignore', 420, 438 ]
+60 silly gunzTarPerm extractEntry console/
+61 silly gunzTarPerm modified mode [ 'console/', 493, 511 ]
+62 silly gunzTarPerm extractEntry console/console.html
+63 silly gunzTarPerm modified mode [ 'console/console.html', 420, 438 ]
+64 silly gunzTarPerm extractEntry console/css/
+65 silly gunzTarPerm modified mode [ 'console/css/', 493, 511 ]
+66 silly gunzTarPerm extractEntry console/css/console.css
+67 silly gunzTarPerm modified mode [ 'console/css/console.css', 420, 438 ]
+68 silly gunzTarPerm extractEntry console/css/pepper-grinder/
+69 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/', 493, 511 ]
+70 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/
+71 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/', 493, 511 ]
+72 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-bg_diagonal-maze_20_6e4f1c_10x10.png
+73 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-bg_diagonal-maze_20_6e4f1c_10x10.png',
+73 silly gunzTarPerm   420,
+73 silly gunzTarPerm   438 ]
+74 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-bg_diagonal-maze_40_000000_10x10.png
+75 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-bg_diagonal-maze_40_000000_10x10.png',
+75 silly gunzTarPerm   420,
+75 silly gunzTarPerm   438 ]
+76 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-bg_fine-grain_10_eceadf_60x60.png
+77 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-bg_fine-grain_10_eceadf_60x60.png',
+77 silly gunzTarPerm   420,
+77 silly gunzTarPerm   438 ]
+78 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-bg_fine-grain_10_f8f7f6_60x60.png
+79 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-bg_fine-grain_10_f8f7f6_60x60.png',
+79 silly gunzTarPerm   420,
+79 silly gunzTarPerm   438 ]
+80 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-bg_fine-grain_15_eceadf_60x60.png
+81 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-bg_fine-grain_15_eceadf_60x60.png',
+81 silly gunzTarPerm   420,
+81 silly gunzTarPerm   438 ]
+82 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-bg_fine-grain_15_f7f3de_60x60.png
+83 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-bg_fine-grain_15_f7f3de_60x60.png',
+83 silly gunzTarPerm   420,
+83 silly gunzTarPerm   438 ]
+84 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-bg_fine-grain_15_ffffff_60x60.png
+85 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-bg_fine-grain_15_ffffff_60x60.png',
+85 silly gunzTarPerm   420,
+85 silly gunzTarPerm   438 ]
+86 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-bg_fine-grain_65_654b24_60x60.png
+87 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-bg_fine-grain_65_654b24_60x60.png',
+87 silly gunzTarPerm   420,
+87 silly gunzTarPerm   438 ]
+88 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-bg_fine-grain_68_b83400_60x60.png
+89 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-bg_fine-grain_68_b83400_60x60.png',
+89 silly gunzTarPerm   420,
+89 silly gunzTarPerm   438 ]
+90 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-icons_222222_256x240.png
+91 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-icons_222222_256x240.png',
+91 silly gunzTarPerm   420,
+91 silly gunzTarPerm   438 ]
+92 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-icons_3572ac_256x240.png
+93 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-icons_3572ac_256x240.png',
+93 silly gunzTarPerm   420,
+93 silly gunzTarPerm   438 ]
+94 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-icons_8c291d_256x240.png
+95 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-icons_8c291d_256x240.png',
+95 silly gunzTarPerm   420,
+95 silly gunzTarPerm   438 ]
+96 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-icons_b83400_256x240.png
+97 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-icons_b83400_256x240.png',
+97 silly gunzTarPerm   420,
+97 silly gunzTarPerm   438 ]
+98 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-icons_fbdb93_256x240.png
+99 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-icons_fbdb93_256x240.png',
+99 silly gunzTarPerm   420,
+99 silly gunzTarPerm   438 ]
+100 silly gunzTarPerm extractEntry console/css/pepper-grinder/images/ui-icons_ffffff_256x240.png
+101 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/images/ui-icons_ffffff_256x240.png',
+101 silly gunzTarPerm   420,
+101 silly gunzTarPerm   438 ]
+102 silly gunzTarPerm extractEntry console/css/pepper-grinder/jquery-ui-1.8.5.custom.css
+103 silly gunzTarPerm modified mode [ 'console/css/pepper-grinder/jquery-ui-1.8.5.custom.css',
+103 silly gunzTarPerm   420,
+103 silly gunzTarPerm   438 ]
+104 silly gunzTarPerm extractEntry console/js/
+105 silly gunzTarPerm modified mode [ 'console/js/', 493, 511 ]
+106 silly gunzTarPerm extractEntry console/js/console.data.js
+107 silly gunzTarPerm modified mode [ 'console/js/console.data.js', 420, 438 ]
+108 silly gunzTarPerm extractEntry console/js/console.ui.js
+109 silly gunzTarPerm modified mode [ 'console/js/console.ui.js', 420, 438 ]
+110 silly gunzTarPerm extractEntry console/js/dygraph-combined.min.js
+111 silly gunzTarPerm modified mode [ 'console/js/dygraph-combined.min.js', 420, 438 ]
+112 silly gunzTarPerm extractEntry console/js/jquery-1.4.2.min.js
+113 silly gunzTarPerm modified mode [ 'console/js/jquery-1.4.2.min.js', 420, 438 ]
+114 silly gunzTarPerm extractEntry console/js/jquery-ui-1.8.5.custom.min.js
+115 silly gunzTarPerm modified mode [ 'console/js/jquery-ui-1.8.5.custom.min.js', 420, 438 ]
+116 silly gunzTarPerm extractEntry console/js/jquery.console.js
+117 silly gunzTarPerm modified mode [ 'console/js/jquery.console.js', 420, 438 ]
+118 silly gunzTarPerm extractEntry console/js/jquery.hotkeys.js
+119 silly gunzTarPerm modified mode [ 'console/js/jquery.hotkeys.js', 420, 438 ]
+120 silly gunzTarPerm extractEntry doc/
+121 silly gunzTarPerm modified mode [ 'doc/', 493, 511 ]
+122 silly gunzTarPerm extractEntry doc/developers.md
+123 silly gunzTarPerm modified mode [ 'doc/developers.md', 420, 438 ]
+124 silly gunzTarPerm extractEntry doc/loop.md
+125 silly gunzTarPerm modified mode [ 'doc/loop.md', 420, 438 ]
+126 silly gunzTarPerm extractEntry doc/monitoring.md
+127 silly gunzTarPerm modified mode [ 'doc/monitoring.md', 420, 438 ]
+128 silly gunzTarPerm extractEntry doc/nl.md
+129 silly gunzTarPerm modified mode [ 'doc/nl.md', 420, 438 ]
+130 silly gunzTarPerm extractEntry doc/nodeload.md
+131 silly gunzTarPerm modified mode [ 'doc/nodeload.md', 420, 438 ]
+132 silly gunzTarPerm extractEntry doc/remote.md
+133 silly gunzTarPerm modified mode [ 'doc/remote.md', 420, 438 ]
+134 silly gunzTarPerm extractEntry doc/reporting.md
+135 silly gunzTarPerm modified mode [ 'doc/reporting.md', 420, 438 ]
+136 silly gunzTarPerm extractEntry doc/stats.md
+137 silly gunzTarPerm modified mode [ 'doc/stats.md', 420, 438 ]
+138 silly gunzTarPerm extractEntry doc/tips.md
+139 silly gunzTarPerm modified mode [ 'doc/tips.md', 420, 438 ]
+140 silly gunzTarPerm extractEntry examples/
+141 silly gunzTarPerm modified mode [ 'examples/', 493, 511 ]
+142 silly gunzTarPerm extractEntry examples/graphjmx.ex.js
+143 silly gunzTarPerm modified mode [ 'examples/graphjmx.ex.js', 493, 511 ]
+144 silly gunzTarPerm extractEntry examples/nodeload.ex.js
+145 silly gunzTarPerm modified mode [ 'examples/nodeload.ex.js', 493, 511 ]
+146 silly gunzTarPerm extractEntry examples/remote.ex.js
+147 silly gunzTarPerm modified mode [ 'examples/remote.ex.js', 493, 511 ]
+148 silly gunzTarPerm extractEntry examples/remotetesting.ex.js
+149 silly gunzTarPerm modified mode [ 'examples/remotetesting.ex.js', 493, 511 ]
+150 silly gunzTarPerm extractEntry examples/riaktest.ex.js
+151 silly gunzTarPerm modified mode [ 'examples/riaktest.ex.js', 493, 511 ]
+152 silly gunzTarPerm extractEntry examples/sample-report.html
+153 silly gunzTarPerm modified mode [ 'examples/sample-report.html', 420, 438 ]
+154 silly gunzTarPerm extractEntry examples/simpletest.ex.js
+155 silly gunzTarPerm modified mode [ 'examples/simpletest.ex.js', 493, 511 ]
+156 silly gunzTarPerm extractEntry examples/test-generator.js
+157 silly gunzTarPerm modified mode [ 'examples/test-generator.js', 420, 438 ]
+158 silly gunzTarPerm extractEntry examples/test-server.js
+159 silly gunzTarPerm modified mode [ 'examples/test-server.js', 493, 511 ]
+160 silly gunzTarPerm extractEntry jmxstat/
+161 silly gunzTarPerm modified mode [ 'jmxstat/', 493, 511 ]
+162 silly gunzTarPerm extractEntry jmxstat/jmxstat.jar
+163 silly gunzTarPerm modified mode [ 'jmxstat/jmxstat.jar', 420, 438 ]
+164 silly gunzTarPerm extractEntry lib/
+165 silly gunzTarPerm modified mode [ 'lib/', 493, 511 ]
+166 silly gunzTarPerm extractEntry lib/config.js
+167 silly gunzTarPerm modified mode [ 'lib/config.js', 420, 438 ]
+168 silly gunzTarPerm extractEntry lib/header.js
+169 silly gunzTarPerm modified mode [ 'lib/header.js', 420, 438 ]
+170 silly gunzTarPerm extractEntry lib/http.js
+171 silly gunzTarPerm modified mode [ 'lib/http.js', 420, 438 ]
+172 silly gunzTarPerm extractEntry lib/loadtesting.js
+173 silly gunzTarPerm modified mode [ 'lib/loadtesting.js', 420, 438 ]
+174 silly gunzTarPerm extractEntry lib/loop/
+175 silly gunzTarPerm modified mode [ 'lib/loop/', 493, 511 ]
+176 silly gunzTarPerm extractEntry lib/loop/index.js
+177 silly gunzTarPerm modified mode [ 'lib/loop/index.js', 420, 438 ]
+178 silly gunzTarPerm extractEntry lib/loop/loop.js
+179 silly gunzTarPerm modified mode [ 'lib/loop/loop.js', 420, 438 ]
+180 silly gunzTarPerm extractEntry lib/loop/multiloop.js
+181 silly gunzTarPerm modified mode [ 'lib/loop/multiloop.js', 420, 438 ]
+182 silly gunzTarPerm extractEntry lib/monitoring/
+183 silly gunzTarPerm modified mode [ 'lib/monitoring/', 493, 511 ]
+184 silly gunzTarPerm extractEntry lib/monitoring/collectors.js
+185 silly gunzTarPerm modified mode [ 'lib/monitoring/collectors.js', 420, 438 ]
+186 silly gunzTarPerm extractEntry lib/monitoring/index.js
+187 silly gunzTarPerm modified mode [ 'lib/monitoring/index.js', 420, 438 ]
+188 silly gunzTarPerm extractEntry lib/monitoring/monitor.js
+189 silly gunzTarPerm modified mode [ 'lib/monitoring/monitor.js', 420, 438 ]
+190 silly gunzTarPerm extractEntry lib/monitoring/monitorgroup.js
+191 silly gunzTarPerm modified mode [ 'lib/monitoring/monitorgroup.js', 420, 438 ]
+192 silly gunzTarPerm extractEntry lib/monitoring/statslogger.js
+193 silly gunzTarPerm modified mode [ 'lib/monitoring/statslogger.js', 420, 438 ]
+194 silly gunzTarPerm extractEntry lib/nl/
+195 silly gunzTarPerm modified mode [ 'lib/nl/', 493, 511 ]
+196 silly gunzTarPerm extractEntry lib/nl/options.js
+197 silly gunzTarPerm modified mode [ 'lib/nl/options.js', 420, 438 ]
+198 silly gunzTarPerm extractEntry lib/remote/
+199 silly gunzTarPerm modified mode [ 'lib/remote/', 493, 511 ]
+200 silly gunzTarPerm extractEntry lib/remote/cluster.js
+201 silly gunzTarPerm modified mode [ 'lib/remote/cluster.js', 420, 438 ]
+202 silly gunzTarPerm extractEntry lib/remote/endpoint.js
+203 silly gunzTarPerm modified mode [ 'lib/remote/endpoint.js', 420, 438 ]
+204 silly gunzTarPerm extractEntry lib/remote/endpointclient.js
+205 silly gunzTarPerm modified mode [ 'lib/remote/endpointclient.js', 420, 438 ]
+206 silly gunzTarPerm extractEntry lib/remote/httphandler.js
+207 silly gunzTarPerm modified mode [ 'lib/remote/httphandler.js', 420, 438 ]
+208 silly gunzTarPerm extractEntry lib/remote/index.js
+209 silly gunzTarPerm modified mode [ 'lib/remote/index.js', 420, 438 ]
+210 silly gunzTarPerm extractEntry lib/remote/remotetesting.js
+211 silly gunzTarPerm modified mode [ 'lib/remote/remotetesting.js', 420, 438 ]
+212 silly gunzTarPerm extractEntry lib/remote/slave.js
+213 silly gunzTarPerm modified mode [ 'lib/remote/slave.js', 420, 438 ]
+214 silly gunzTarPerm extractEntry lib/remote/slavenode.js
+215 silly gunzTarPerm modified mode [ 'lib/remote/slavenode.js', 420, 438 ]
+216 silly gunzTarPerm extractEntry lib/remote/slaves.js
+217 silly gunzTarPerm modified mode [ 'lib/remote/slaves.js', 420, 438 ]
+218 silly gunzTarPerm extractEntry lib/reporting/
+219 silly gunzTarPerm modified mode [ 'lib/reporting/', 493, 511 ]
+220 silly gunzTarPerm extractEntry lib/reporting/dygraph.tpl
+221 silly gunzTarPerm modified mode [ 'lib/reporting/dygraph.tpl', 420, 438 ]
+222 silly gunzTarPerm extractEntry lib/reporting/external.js
+223 silly gunzTarPerm modified mode [ 'lib/reporting/external.js', 420, 438 ]
+224 silly gunzTarPerm extractEntry lib/reporting/index.js
+225 silly gunzTarPerm modified mode [ 'lib/reporting/index.js', 420, 438 ]
+226 silly gunzTarPerm extractEntry lib/reporting/report.js
+227 silly gunzTarPerm modified mode [ 'lib/reporting/report.js', 420, 438 ]
+228 silly gunzTarPerm extractEntry lib/reporting/reportmanager.js
+229 silly gunzTarPerm modified mode [ 'lib/reporting/reportmanager.js', 420, 438 ]
+230 silly gunzTarPerm extractEntry lib/reporting/summary.tpl
+231 silly gunzTarPerm modified mode [ 'lib/reporting/summary.tpl', 420, 438 ]
+232 silly gunzTarPerm extractEntry lib/reporting/template.js
+233 silly gunzTarPerm modified mode [ 'lib/reporting/template.js', 420, 438 ]
+234 silly gunzTarPerm extractEntry lib/stats.js
+235 silly gunzTarPerm modified mode [ 'lib/stats.js', 420, 438 ]
+236 silly gunzTarPerm extractEntry lib/util.js
+237 silly gunzTarPerm modified mode [ 'lib/util.js', 420, 438 ]
+238 silly gunzTarPerm extractEntry LICENSE
+239 silly gunzTarPerm modified mode [ 'LICENSE', 420, 438 ]
+240 silly gunzTarPerm extractEntry Makefile
+241 silly gunzTarPerm modified mode [ 'Makefile', 420, 438 ]
+242 silly gunzTarPerm extractEntry nl.js
+243 silly gunzTarPerm modified mode [ 'nl.js', 493, 511 ]
+244 silly gunzTarPerm extractEntry nodeload.js
+245 silly gunzTarPerm modified mode [ 'nodeload.js', 493, 511 ]
+246 silly gunzTarPerm extractEntry package.json
+247 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+248 silly gunzTarPerm extractEntry README.md
+249 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+250 silly gunzTarPerm extractEntry RELEASE-NOTES.md
+251 silly gunzTarPerm modified mode [ 'RELEASE-NOTES.md', 420, 438 ]
+252 silly gunzTarPerm extractEntry results-1327556557728-stats.log
+253 silly gunzTarPerm modified mode [ 'results-1327556557728-stats.log', 420, 438 ]
+254 silly gunzTarPerm extractEntry results-1327556557728.html
+255 silly gunzTarPerm modified mode [ 'results-1327556557728.html', 420, 438 ]
+256 silly gunzTarPerm extractEntry results-2012-02-01T05:32:46.827Z-stats.log
+257 silly gunzTarPerm modified mode [ 'results-2012-02-01T05:32:46.827Z-stats.log', 420, 438 ]
+258 silly gunzTarPerm extractEntry results-2012-02-01T05:32:46.827Z.html
+259 silly gunzTarPerm modified mode [ 'results-2012-02-01T05:32:46.827Z.html', 420, 438 ]
+260 silly gunzTarPerm extractEntry scripts/
+261 silly gunzTarPerm modified mode [ 'scripts/', 493, 511 ]
+262 silly gunzTarPerm extractEntry scripts/jsmin.js
+263 silly gunzTarPerm modified mode [ 'scripts/jsmin.js', 493, 511 ]
+264 silly gunzTarPerm extractEntry scripts/process_tpl.js
+265 silly gunzTarPerm modified mode [ 'scripts/process_tpl.js', 493, 511 ]
+266 silly gunzTarPerm extractEntry test/
+267 silly gunzTarPerm modified mode [ 'test/', 493, 511 ]
+268 silly gunzTarPerm extractEntry test/http.test.js
+269 silly gunzTarPerm modified mode [ 'test/http.test.js', 420, 438 ]
+270 silly gunzTarPerm extractEntry test/loop.test.js
+271 silly gunzTarPerm modified mode [ 'test/loop.test.js', 420, 438 ]
+272 silly gunzTarPerm extractEntry test/monitoring.test.js
+273 silly gunzTarPerm modified mode [ 'test/monitoring.test.js', 420, 438 ]
+274 silly gunzTarPerm extractEntry test/remote.test.js
+275 silly gunzTarPerm modified mode [ 'test/remote.test.js', 493, 511 ]
+276 silly gunzTarPerm extractEntry test/reporting.test.js
+277 silly gunzTarPerm modified mode [ 'test/reporting.test.js', 420, 438 ]
+278 silly gunzTarPerm extractEntry test/stats.test.js
+279 silly gunzTarPerm modified mode [ 'test/stats.test.js', 420, 438 ]
+280 silly gunzTarPerm extractEntry test/util.test.js
+281 silly gunzTarPerm modified mode [ 'test/util.test.js', 420, 438 ]
+282 silly gunzTarPerm extractEntry TODO
+283 silly gunzTarPerm modified mode [ 'TODO', 420, 438 ]
+284 error Error: ENOENT, open 'C:\Users\Stephen\Documents\Node\CineMatch\node_modules\nodeload\results-2012-02-01T05:32:46.827Z-stats.log'
+285 error If you need help, you may report this *entire* log,
+285 error including the npm and node versions, at:
+285 error     <http://github.com/npm/npm/issues>
+286 error System Windows_NT 6.2.9200
+287 error command "C:\\Program Files (x86)\\nodejs\\\\node.exe" "C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "nodeload"
+288 error cwd C:\Users\Stephen\Documents\Node\CineMatch
+289 error node -v v0.10.36
+290 error npm -v 1.4.28
+291 error path C:\Users\Stephen\Documents\Node\CineMatch\node_modules\nodeload\results-2012-02-01T05:32:46.827Z-stats.log
+292 error code ENOENT
+293 error errno 34
+294 verbose exit [ 34, true ]

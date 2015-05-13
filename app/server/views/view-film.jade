@@ -1,0 +1,89 @@
+
+extends layout
+
+block content
+
+	include navbar
+	include modals/alert
+	include modals/confirm
+
+	script
+		$('#film').addClass('active');
+	#profile-container
+		div.top-padding
+		div.container-fluid
+			div.row-fluid
+				div.well.view-film
+						div.row-fluid
+							div.center
+								h1 #{film.title}
+							hr
+							a(href="/film/" + film.edi)
+								-var removejpg = film.poster.slice(0, -4);
+								img(src="http://www.cineworld.co.uk/" + removejpg + '_iphone.jpg', alt="img", width="40%").glow.pull-left
+							br
+							p.bold Rating:
+							p #{film.rating}
+							p.bold Release:
+							p #{film.release}
+							p.bold Length:
+							p #{film.length}
+							p.bold Director:
+							p #{film.director}
+							p.bold Cast:
+							p #{film.cast}
+
+							div.synopsis
+								hr
+								p.bold Synopsis:
+								p #{film.synopsis}
+
+								hr
+								div.center
+									//- Add films button //
+									button(type='button', class="add-film", value="#{film.edi}", id="Add#{film.edi}", style="display:none").btn.btn-primary
+										i.icon-plus.icon-white
+										|  Add to MyFilms
+
+									//- Added to films button //
+									button(type='button', class="film-added", value="/#{udata.user}", id="Added#{film.edi}", style="display:none").btn.btn-success
+										i.icon-ok.icon-white
+										|  In MyFilms
+
+									//- Remove film button
+									button(type="button", class="remove-film", value="#{film.edi}", id="Remove#{film.edi}", style="display:none").btn
+										i.icon-remove.icon-black
+
+									//- Film not Available
+									button(type="button", id="NotAvailable#{film.edi}", style="display:none").btn
+										i.icon-remove.icon-black
+										|  Not available at your Cinema
+
+
+									//- If film is not available at the user's local cinema //
+								-if (films.indexOf(film.edi) == -1)
+									script
+										$('#NotAvailable'+#{film.edi}).show();
+
+									//- If film is not in user's film list //
+								-else if (userfilms.indexOf(film.edi) > -1)
+									script
+										$('#Added'+#{film.edi}).show();
+										$('#Remove'+#{film.edi}).show();
+
+									//- else, film is not in user's film list //
+								-else
+									script
+										$('#Add'+#{film.edi}).show();
+
+
+
+block scripts
+	script(src='/vendor/jquery.min.js')
+	script(src='/vendor/jquery.form.js')
+	script(src='/vendor/bootstrap-modal.js')
+	script(src='/vendor/bootstrap-transition.js')
+	script(src='/js/views/home.js')
+	script(src='/js/views/editprofile.js')
+	script(src='/js/controllers/accountController.js')
+	script(src='/js/form-validators/accountValidator.js')

@@ -1,0 +1,82 @@
+
+extends layout
+
+block content
+
+	include navbar
+	include modals/form-errors
+	include modals/confirm
+	include modals/alert
+
+	div#profile-container.grey.divborder
+		div.container-fluid
+			div.row-fluid
+				br
+				div.white.film-container
+					div.inner-div
+						div.row-fluid
+							h2 Welcome #{udata.name}!
+							hr
+							h1.center Latest Activity for #{udata.cinema}:
+
+			- for (var i = 0; i < films.length; i++)
+					div.white.hometile.center
+						div.inner-div
+							div.titlecontainer
+								label.large
+									-var title = films[i].title
+									-if(title.length > 30) title = title.substring(0,30)+"..";
+									a#film(href="/film/" + films[i].edi).large
+										h7 #{title}
+							hr
+							a(href="/film/" + films[i].edi)
+								-var removejpg = films[i].poster.slice(0, -4);
+								img(src="http://www.cineworld.co.uk" + removejpg + '_iphone.jpg', alt="img", width="90%").glow
+							a(href='/' + udata.user + '/CineMatches/1?film='+films[i].title+'&age=All')
+								-if (films[i].viewers == 1)
+									p #{films[i].viewers} person wants to watch this!
+								-else
+									p #{films[i].viewers} people want to watch this!
+							p.bold #{films[i].release}
+								br
+								br
+								//- Add films button //
+								button(type='button', class="add-film", value="#{films[i].edi}", id="Add#{films[i].edi}").btn.btn-primary
+									i.icon-plus.icon-white
+									|  Add to MyFilms
+
+								//- Added to films button //
+								button(type='submit', class="film-added", value="/#{udata.user}/MyFilms", id="Added#{films[i].edi}").btn.btn-success
+									i.icon-ok.icon-white
+									|  In MyFilms
+
+								//- Remove film button
+								button(type="button", class="remove-film", value="#{films[i].edi}", id="Remove#{films[i].edi}").btn.btn-default
+									i.icon-remove.icon-black
+
+									//- If film is not in user's film list //
+								-if (userfilms.indexOf(films[i].edi) > -1)
+									script
+										$('#Add'+#{films[i].edi}).hide();
+
+									//- else. film is not in user's film list //
+								-else
+									script
+										$('#Remove'+#{films[i].edi}).hide();
+										$('#Added'+#{films[i].edi}).hide();
+
+	//- Set 'home' to active on navbar
+	script
+		$('#home').addClass('active');
+		$('.carousel').carousel({
+			interval: 6000
+		})
+
+block scripts
+	script(src='/vendor/jquery.min.js')
+	script(src='/vendor/jquery.form.js')
+	script(src='/vendor/bootstrap-modal.js')
+	script(src='/vendor/bootstrap-transition.js')
+	script(src='/js/views/home.js')
+	script(src='/js/controllers/accountController.js')
+	script(src='/js/form-validators/accountValidator.js')

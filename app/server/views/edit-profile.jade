@@ -1,0 +1,104 @@
+
+extends layout
+
+block content
+
+	include navbar
+	include modals/form-errors
+	include modals/confirm
+	include modals/alert
+
+	//-preset form values if we receive a userdata object //
+	- user = typeof(udata) != 'undefined' ? udata : { }
+	//-store the userId on the client side in a hidden input field //
+	br
+	div#form-container
+		div.container-fluid
+			div.row-fluid
+				form(method="post", action="/update-profile")#account-form.form-horizontal.well
+					h1
+					p#sub1.subheading
+					hr
+					h8.bold Full Name:
+					#name-cg.control-group
+						p.control-label(for='name-tf')
+							input#name-tf(type='text', name='name', value= user.name)
+
+					h8.bold Age:
+					#age-cg.control-group
+						p.control-label(for='age-tf')
+							select#age-tf.input-medium(name='age')
+								each item in agelist
+									option(selected=item.name == user.age)= item.name
+
+					h8.bold Gender:
+					#gender-cg.control-group
+						p.control-label(for='gender-tf')
+							select#gender-tf.input-medium(name='gender')
+								each item in genders
+									option(selected=item.name == user.gender)= item.name
+
+					h8.bold Preference:
+					#preference-cg.control-group
+						p.control-label(for='preference-tf')
+							select#preference-tf.input-medium(name='preference')
+								each item in preferences
+									option(selected=item.name == user.preference)= item.name
+
+					h8.bold Height:
+					#height-cg.control-group
+						p.control-label(for='height-tf')
+							select#height-tf.input-medium(name='height')
+								each item in heightlist
+									option(selected=item.name == user.height)= item.name
+
+					h8.bold Body Type:
+					#bodyType-cg.control-group
+						p.control-label(for='bodyType-tf')
+							select#bodyType-tf.input-medium(name='bodyType')
+								each item in bodytypes
+									option(selected=item.name == user.bodyType)= item.name
+
+					h8.bold Local Cinema:
+					#cinema-cg.control-group
+						p.control-label(for='cinema-tf')
+							select#cinema-tf(name='cinema')
+								each item in cinemas
+									option(value=item.CinemaID, selected=item.name == user.cinema)= item.name
+
+					h8.bold About Me:
+					#bio-cg.control-group
+						p.control-label(for='bio-tf')
+						textarea#bio-tf(rows="5", maxlength="400", style="width: 90%", name='bio') #{user.bio}
+
+					//-check token to bypass email and password input check//
+					#check-cg
+						.controls
+							input#check-tf(type='hidden', name='check', value= user.user)
+					//-hidden user token //
+					#user-cg
+						.controls
+							input#user-tf.input-xlarge(type='hidden', name='user', value= user.user)
+					hr
+					.form-actions
+						button(type='button')#account-form-btn1.btn
+						button(type='submit')#account-form-btn2.btn
+
+	script
+		//-Set Navbar
+		$('#profile').addClass('active');
+		//-Set agelist values for form checking//
+		var ages = [];
+		$('#age-tf option').each(function() {
+			ages.push($(this).val())
+		});
+
+block scripts
+	script(src='/vendor/jquery.min.js')
+	script(src='/vendor/jquery.form.js')
+	script(src='/vendor/bootstrap-modal.js')
+	script(src='/vendor/bootstrap-transition.js')
+	script(src='/js/views/home.js')
+	script(src='/js/views/editprofile.js')
+	script(src='/js/controllers/accountController.js')
+	script(src='/js/form-validators/accountValidator.js')

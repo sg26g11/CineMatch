@@ -1,0 +1,96 @@
+
+extends layout
+
+block content
+
+	include navbar
+	include modals/alert
+	include modals/confirm
+
+	-if (user.user == udata.user)
+		script
+			$('#myLinks').addClass('active');
+
+	div#profile-container.white
+		div.container-fluid
+			div.row-fluid
+				br
+				br
+				//- Photos Container //
+				div.film-container
+						//- If user is on their profile //
+						-if (user._id == udata._id)
+							h1 Your Photos:
+								button(id="editShow").btn.btn-primary.pull-right
+									i.icon-pencil.icon-white
+									|  Edit Photos
+								button(id="editHide", style="display:none;").btn.btn-primary.pull-right
+									i.icon-pencil.icon-white
+									|  Stop Editing
+							hr
+
+							//- If user has no films //
+							-if (photos.length == 0)
+								p You have no photos yet!
+								p To show others what you look like, please consider adding some photos!
+
+
+							//- If user is NOT on their profile //
+						-else
+							h2 #{user.name}'s Photos:
+							-if (photos.length == 0)
+								p This user has no films yet!
+							a(href="/" + user.user)
+								button(type='button').btn.btn-primary
+									i.icon-user.icon-white
+									|  Back to User's Profile
+							hr
+
+						//- If user has photos //
+						-if (photos.length > 0)
+							div.center
+								//- Print out each photo tile //
+								-for (var i = 0; i < photos.length; i++)
+									div.photostile.center
+
+										//- If user is on their profile, create edit options //
+										-if (user._id == udata._id)
+											-if (photos[i].profile == false)
+												div.profilePhoto(style="display:none;")
+													a(href="/update-profile-photo/"+photos[i].name)
+														button(type='submit').btn.btn-primary
+															i.icon-user.icon-white
+															|  Make Profile Photo
+											-else
+												div.profilePhoto(style="display:none;")
+													a(href="/update-profile-photo/"+photos[i].name)
+														button(type='submit').btn.btn-success
+															| This is your Profile Photo
+
+										a(href="#")
+											popup
+												img(src="/img/userphotos/thumbs/" + photos[i].name, alt="img", width="95%", id=photos[i].name).glow.photos
+
+
+										-if (user._id == udata._id)
+											div.remove(style="display:none;")
+												a(href="/remove-photo/"+photos[i].name)
+													button(type='submit').btn.btn-danger
+														i.icon-remove.icon-white
+														|  Remove
+			hr
+			div.center
+				//- Photo upload form //
+				form#uploadForm(enctype="multipart/form-data", action="/add-photo", method="post")
+					input(type="file", name="userPhoto", id="userPhotoInput")
+					input(type="submit").btn.btn-primary
+
+block scripts
+	script(src='/vendor/jquery.min.js')
+	script(src='/vendor/jquery.form.js')
+	script(src='/vendor/bootstrap-modal.js')
+	script(src='/vendor/bootstrap-transition.js')
+	script(src='/js/views/profile.js')
+	script(src='/js/views/MyPhotos.js')
+	script(src='/js/controllers/accountController.js')
+	script(src='/js/controllers/profileController.js')

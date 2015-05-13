@@ -1,0 +1,42 @@
+
+extends layout
+
+block content
+
+	div.center
+		a(href="/")
+			img(src="/img/CineMatch-logo.png", alt="img", width="400px")
+
+	#login-container
+		form( method="post")#login-form.well.span5
+
+			h1 Hello!
+			p.subheading Please Login To Your Account
+			label.bold Username:
+			input(type="text", name="user", id='user-tf').span4.required
+			label.bold Password:
+			input(type="password", name="pass", id='pass-tf').span4.required
+			button(type="submit")#btn-login.btn.btn-primary
+				i.icon-lock.icon-white
+				|  Log in
+			label#remember-me.checkbox Remember Me
+				input(type="checkbox", checked='checked')
+
+			div.clear-fix
+			a(href='#')#forgot-password Forgot Your Password?
+			hr
+			div.btm-links
+				a(href='/signup')#create-account Create An Account
+
+	include modals/alert
+	include modals/lost-password
+
+block scripts
+	script(src='/vendor/jquery.min.js')
+	script(src='/vendor/jquery.form.js')
+	script(src='/vendor/bootstrap-modal.js')
+	script(src='/vendor/bootstrap-transition.js')
+	script(src='/js/views/login.js')
+	script(src='/js/controllers/loginController.js')
+	script(src='/js/form-validators/loginValidator.js')
+	script(src='/js/form-validators/emailValidator.js')

@@ -1,0 +1,245 @@
+
+extends layout
+
+block content
+	include navbar
+
+	-if (user.user == udata.user)
+		script
+			$('#myLinks').addClass('active');
+
+			//- Use ajax to dismiss notifications //
+			$.ajax({
+						method: 'POST',
+						url: '/dismissMatchNotifications',
+						context: document.body,
+						success: function(){
+							}
+				});
+
+	div#profile-container.grey.divborder
+		div.container-fluid
+			div.row-fluid
+				//- If user has new match requests //
+				-if (newMatchRequests.length > 0)
+					div.top-padding
+					div.film-container.white
+						div.center
+							div.inner-div
+								//- If user has matches //
+								-if (newMatchRequests.length > 0)
+									-if (newMatchRequests.length == 1)
+										h2 You have #{newMatchRequests.length} match request:
+									-else
+										h2 You have #{newMatchRequests.length} match requests:
+									p
+									//- Match Slider
+									div.scrollbar
+										div.handle
+											div.mousearea
+									div.frame#centered
+										ul.clearfix
+											//- Print out each match //
+											-for (var i = 0; i < newMatchRequests.length; i++)
+												li.white.glow
+													br
+													a(href="/#{newMatchRequests[i].user}")
+														-var name = newMatchRequests[i].name
+														-if (name.length > 20) name = name.substring(0,20)+"..";
+														p.large #{name}
+														img(src="/img/userPhotos/thumbs/" + newMatchRequests[i].profilePhoto, alt="img", width="88%").glow
+
+													//- Request buttons //
+													div(style="display:none;", id="matchRequest#{newMatchRequests[i].user}")
+														button(type='button', class="matchRequestButton", value=newMatchRequests[i].user, id="matchRequestButton#{newMatchRequests[i].user}").btn.btn-primary
+															i.icon-heart.icon-white
+															|  Send match request!
+
+													div(style="display:none;", id="requestSent#{newMatchRequests[i].user}")
+														button(type='button').btn.btn-success
+															i.icon-ok.icon-white
+															|  Request Sent
+													p
+													div(style="display:none;", id="requestReceived#{newMatchRequests[i].user}")
+														button(type='button', class="AcceptRequest", value=newMatchRequests[i].user, id="AcceptRequest#{newMatchRequests[i].user}").btn.btn-success
+															i.icon-ok.icon-white
+															| Accept
+														button(type='button', class="DeclineRequest", value=newMatchRequests[i].user, id="DeclineRequest#{newMatchRequests[i].user}").btn.btn-default
+															i.icon-remove.icon-black
+															| Decline
+														p
+													div(style="display:none;", id="declined#{newMatchRequests[i].user}")
+														button(type='button').btn.btn-default
+															i.icon-ok.icon-black
+															| You declined the request
+													p
+
+													div(style="display:none;", id="matched#{newMatchRequests[i].user}")
+														a(href="/"+udata.user+'/MyMatches')
+															button(type='button', value=newMatchRequests[i].user).btn.btn-danger
+																i.icon-heart.icon-white
+																|  You are both matched!
+															p
+															a(href="/"+udata.user+"/MyMessages/"+newMatchRequests[i].user)
+																button(type='button').btn.btn-primary
+																	i.icon-envelope.icon-white
+																	|  Send Message
+															p
+
+													-var buttonshown = false
+													- for (var x = 0; x < allRequests.length; x++)
+														-if (allRequests[x].receiver == newMatchRequests[i].user)
+																-if (allRequests[x].accepted == true)
+																	-var buttonshown = true
+																	script
+																		$('#matched#{newMatchRequests[i].user}').show();
+																-else if (allRequests[x].sender == true)
+																	-var buttonshown = true
+																	script
+																		$('#requestSent#{newMatchRequests[i].user}').show();
+																-else if (allRequests[x].sender == false)
+																	-var buttonshown = true
+																	script
+																		$('#requestReceived#{newMatchRequests[i].user}').show();
+													-if (buttonshown!==true)
+														script
+															$('#matchRequest#{newMatchRequests[i].user}').show();
+
+									.form-actions
+										ul.pages
+										div.controls.center
+											button.btn.prevPage
+												i.icon-chevron-left
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											button.btn.nextPage
+												i.icon-chevron-right
+
+				//- If user has sent requests //
+				-if (sentRequests.length > 0)
+					div.top-padding
+					div.film-container.white
+						div.center
+							div.inner-div
+								h2 Your sent requests:
+								p
+								//- Match Slider
+								div.scrollbar
+									div.handle
+										div.mousearea
+								div.frame-match#centered
+									ul.clearfix
+										//- Print out each new match //
+										-for (var i = 0; i < sentRequests.length; i++)
+											li.white.glow
+												br
+												a(href="/#{sentRequests[i].user}")
+													-var name = sentRequests[i].name
+													-if (name.length > 20) name = name.substring(0,20)+"..";
+													p.large #{name}
+													img(src="/img/userPhotos/thumbs/" + sentRequests[i].profilePhoto, alt="img", width="88%").glow
+												p
+
+								.form-actions
+									ul.pages
+									div.controls.center
+										button.btn.prevPage
+											i.icon-chevron-left
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										button.btn.nextPage
+											i.icon-chevron-right
+
+				//- If user has no matches //
+				-if (acceptedRequests.length == 0 && newMatches.length == 0)
+					div.top-padding
+					div.film-container.white
+						div.center
+							div.inner-div
+								h2 You have no matches yet
+								p
+								p If you find someone you like the look of, send them a match request and get chatting!
+								a(href="/"+udata.user+"/CineMatches/1")
+									button.btn.btn-primary
+										| Find matches now!
+
+					//- If user has new matches
+				-else
+					div.top-padding
+					div.film-container.white
+						div.center
+							div.inner-div
+								//- If user has new matches //
+								-if (newMatches.length+acceptedRequests.length > 0)
+									-if (newMatches.length == 0)
+										p
+									-if (newMatches.length == 1)
+										h3.orange #{newMatches.length} new match!!
+									-if (newMatches.length > 1)
+										h3.orange #{newMatches.length} new matches!!
+
+									-if (acceptedRequests.length+newMatches.length == 1)
+										h2 You have 1 match at #{udata.cinema}:
+									-else
+										h2 You have #{acceptedRequests.length+newMatches.length} matches at #{udata.cinema}:
+									p
+									//- Match Slider
+									div.scrollbar
+										div.handle
+											div.mousearea
+									div.frame#cyclepages
+										ul.clearfix
+											//- Print out each new match //
+											-for (var i = 0; i < newMatches.length; i++)
+												li.white.glow
+													br
+													a(href="/#{newMatches[i].user}")
+														-var name = newMatches[i].name
+														-if (name.length > 20) name = name.substring(0,20)+"..";
+														p.large #{name}
+													p Age: #{newMatches[i].age}
+													a(href="/#{newMatches[i].user}")
+														img(src="/img/userPhotos/thumbs/" + newMatches[i].profilePhoto, alt="img", width="88%").glow
+													h3.orange New!!
+													p
+													a(href="/#{udata.user}/MyMessages/#{newMatches[i].user}")
+														button(type='button').btn.btn-primary
+															i.icon-envelope.icon-white
+															|  Open Chat
+													p
+											//- Print out each seen match //
+											-for (var i = 0; i < acceptedRequests.length; i++)
+												li.white.glow
+													br
+													a(href="/#{acceptedRequests[i].user}")
+														-var name = acceptedRequests[i].name
+														-if (name.length > 20) name = name.substring(0,20)+"..";
+														p.large #{name}
+													p Age: #{acceptedRequests[i].age}
+													a(href="/#{acceptedRequests[i].user}")
+														img(src="/img/userPhotos/thumbs/" + acceptedRequests[i].profilePhoto, alt="img", width="88%").glow
+													a(href="/#{udata.user}/MyMessages/#{acceptedRequests[i].user}")
+														button(type='button').btn.btn-primary
+															i.icon-envelope.icon-white
+															|  Open Chat
+													p
+
+									.form-actions
+										ul.pages
+										div.controls.center
+											button.btn.prevPage
+												i.icon-chevron-left
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											button.btn.nextPage
+												i.icon-chevron-right
+
+block scripts
+	script(src='https://raw.githubusercontent.com/darsain/sly/master/dist/sly.js')
+	script(src='http://darsa.in/sly/examples/js/vendor/plugins.js')
+	script(src='http://darsa.in/sly/js/sly.min.js')
+	script(src='http://darsa.in/sly/examples/js/horizontal.js')
+	script(src='/vendor/jquery.min.js')
+	script(src='/vendor/jquery.form.js')
+	script(src='/vendor/bootstrap-modal.js')
+	script(src='/vendor/bootstrap-transition.js')
+	script(src='/js/views/MyMatches.js')
+	script(src='/js/controllers/profileController.js')
+	script(src='/js/controllers/accountController.js')

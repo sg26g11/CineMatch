@@ -1,0 +1,153 @@
+
+extends layout
+
+block content
+
+	include navbar
+	include modals/alert
+	include modals/confirm
+
+	script
+		$('#CineMatches').addClass('active');
+	-currentPage = parseInt(currentPage);
+	-totalPages = parseInt(totalPages);
+
+	div#profile-container.grey.divborder
+		div.container-fluid
+			div.row-fluid
+				div.top-padding
+				div.white.film-container
+					div.inner-div
+						form(action="/"+ udata.user + "/CineMatches/1", method="post")
+							-if (totalMatches > 1)
+								p.bold #{totalMatches} matches!
+							-else if (totalMatches == 1)
+								p.bold #{totalMatches} match!
+							-else
+								p.bold No matches for this search :(
+							div.span6
+								p.small.bold Wants to watch:
+								select(style="width: 100%", name="film")
+									-if (selectedFilm == '')
+										option(selected=true)='Any Cinema Film'
+										option='-- Any of MyFilms --'
+									-else
+										option='Any Cinema Film'
+										option(selected=true)='-- Any of MyFilms --'
+									each item in films
+										option(selected=item.title == selectedFilm)= item.title
+
+							div.span2
+								p.small.bold Age:
+								select(style="width: 100%", name="age")
+									option='All'
+									each item in ageRange
+										option(selected=item.name == selectedAge)=item.name
+							div.span3
+								p.small.bold Show:
+								select(style="width: 100%", name="show")
+									option(selected='All' == selectedShow)='All'
+									option(selected='New Users' == selectedShow)='New Users'
+									option(selected='Matched Users' == selectedShow)='Matched Users'
+									option(selected='Sent Requests' == selectedShow)='Sent Requests'
+									option(selected='Received Requests' == selectedShow)='Received Requests'
+
+							br
+							br
+							br
+							.form-actions
+								input(type='submit')
+									i.icon-search.icon-white
+									|  Update Results
+
+			//- Print out each match //
+			- for (var i = 0; i < matches.length; i++)
+				//- Remove own profile from matches! /
+				-if (matches[i].user !== udata.user)
+					div.white.matchestile.center
+						div.inner-div
+							label.large
+								a(href="/" + matches[i].user).large #{matches[i].name}
+							label.bold.large Age: #{matches[i].age} | #{matches[i].gender}
+								a(href="/" + matches[i].user)
+									img(src="/img/userPhotos/thumbs/" + matches[i].profilePhoto, alt="img", width="90%").glow
+
+							//- Request buttons //
+							div(style="display:none;", id="matchRequest#{matches[i].user}")
+								button(type='button', class="matchRequestButton", value=matches[i].user, id="matchRequestButton#{matches[i].user}").btn.btn-primary
+									i.icon-heart.icon-white
+									|  Send match request!
+
+							div(style="display:none;", id="requestSent#{matches[i].user}")
+								button(type='button').btn.btn-success
+									i.icon-ok.icon-white
+									|  Request Sent
+
+							div(style="display:none;", id="requestReceived#{matches[i].user}")
+								a(href="/"+matches[i].user)
+									button(type='button', value=matches[i].user).btn.btn-primary
+										|  Request Received!
+									button(type='button', class="AcceptRequest", value=matches[i].user, id="AcceptRequest#{matches[i].user}").btn.btn-success
+										i.icon-ok.icon-white
+										| Accept
+
+							div(style="display:none;", id="matched#{matches[i].user}")
+								a(href="/#{udata.user}/MyMessages/#{matches[i].user}")
+									button(type='button').btn.btn-primary
+										i.icon-envelope.icon-white
+										|  Open Chat
+
+							-var buttonshown = false
+							- for (var x = 0; x < allRequests.length; x++)
+								-if (allRequests[x].receiver == matches[i].user)
+										-if (allRequests[x].accepted == true)
+											-var buttonshown = true
+											script
+												$('#matched#{matches[i].user}').show();
+										-else if (allRequests[x].sender == true)
+											-var buttonshown = true
+											script
+												$('#requestSent#{matches[i].user}').show();
+										-else if (allRequests[x].sender == false)
+											-var buttonshown = true
+											script
+												$('#requestReceived#{matches[i].user}').show();
+							-if (buttonshown!==true)
+								script
+									$('#matchRequest#{matches[i].user}').show();
+
+			//- Format page numbers panel//
+			if (totalMatches > 1 && totalPages > 1)
+				div.white.showfilms.center
+					div.inner-div
+						p.bold.pull-left Page #{currentPage} of #{totalPages}:
+						br
+						hr
+						-if (totalPages > 1)
+							-if (currentPage !== 1)
+								a.pull-left(href="/#{udata.user}/CineMatches/#{currentPage-1}") Previous Page
+							-if (currentPage < totalPages)
+								a.pull-right(href="/#{udata.user}/CineMatches/#{currentPage + 1}") Next Page
+							-for (var i = currentPage-4; i <= currentPage+4; i++)
+								-if (i > 0)
+									-if (i <= totalPages)
+										-if (i == currentPage)
+											a.bold(href="/#{udata.user}/CineMatches/#{i}") &nbsp;#{i}&nbsp;
+												-if (i !== totalPages)
+													|
+										-else
+											a(href="/#{udata.user}/CineMatches/#{i}") &nbsp;#{i}&nbsp;
+											-if (i == currentPage+4 || i == totalPages)
+												&nbsp;
+											-else
+												|
+
+block scripts
+	script(src='/vendor/jquery.min.js')
+	script(src='/vendor/jquery.form.js')
+	script(src='/vendor/bootstrap-modal.js')
+	script(src='/vendor/bootstrap-transition.js')
+	script(src='/js/views/CineMatches.js')
+	script(src='/js/controllers/accountController.js')
+	script(src='/js/controllers/matchController.js')
+	script(src='/js/controllers/profileController.js')

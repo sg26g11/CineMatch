@@ -1,0 +1,36 @@
+
+extends layout
+
+block content
+	div.container-fluid
+		div.row-fluid
+			div.well
+				table.table.table-bordered.table-striped
+					thead
+						tr
+							th #
+							th user1
+							th user2
+							th last Sender
+							th Last Msg
+							th Timestamp
+							th Height
+							th Body Type
+							th Bio
+							th Username
+							th Account Created
+
+					tbody
+					- for (var i = 0; i < accts.length; i++)
+						tr
+							td= i+1
+							td= accts[i].user
+							td= accts[i].name
+							td= accts[i].gender
+							td= accts[i].preference
+							td= accts[i]._id
+							td= accts[i].sender
+							td= accts[i].receiver
+							td= accts[i].msg
+							td= accts[i].seen
+							td= accts[i].date

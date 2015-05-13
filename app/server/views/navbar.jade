@@ -1,0 +1,74 @@
+
+block content
+	div.navbar.navbar-fixed-top
+		div.navbar-inner
+			div.container
+				ul.nav
+					li#home
+						a(href='/')
+							img(src="/img/home.fw.png", alt="img", height="20px")
+					li.dropdown#myLinks
+						a.dropdown-toggle(href='#', data-toggle='dropdown')
+							|  MyHub&nbsp;
+
+							//- Set notification Icon //
+							-if (matchNotifications.length > 0 || messageNotifications.length > 0)
+								//- Set notification counter //
+								-var matchNotificationsNumber = 0
+
+								-for (var i = 0; i < matchNotifications.length; i++)
+									-if (matchNotifications[i].seen == false)
+										-matchNotificationsNumber++
+								span.btn-danger
+									i.icon-fire.icon-white.padding-top
+							span.caret
+
+							ul.dropdown-menu(role='menu')
+								li
+									a(href='/' + udata.user + '/MyFilms')
+										i.icon-film.icon-black.padding-top
+										|  MyFilms
+								li
+									a(href='/' + udata.user + '/MyPhotos')
+										i.icon-picture.icon-black.padding-top
+										|  MyPhotos
+								li.divider
+								li
+									a(href='/' + udata.user + '/MyMessages/All')
+										i.icon-comment.icon-black.padding-top
+										|  MyMessages &nbsp;
+										//- Show notification number //
+										-if (messageNotifications.length > 0)
+											span.glow
+												i.orange
+												| &nbsp;#{messageNotifications.length} new!&nbsp;
+								li
+									a(href='/' + udata.user + '/MyMatches')
+										i.icon-heart.icon-black.padding-top
+										|  MyMatches &nbsp;
+										//- Show notification number //
+										-if (matchNotificationsNumber > 0)
+											span.glow
+												i
+												| &nbsp;#{matchNotificationsNumber} new!&nbsp;
+
+							li#profile.padding-top-small
+								a(href='/' + udata.user) MyProfile
+							li.padding-top-small#CineMatches
+								a(href='/' + udata.user + '/CineMatches/1') CineMatches
+
+				ul.nav.pull-right
+					li.searchbar
+						input#search.input-append(type="search", placeholder="Search..") Search..
+						h2#results
+					li.dropdown#account-settings
+						a.dropdown-toggle(href='#', data-toggle='dropdown')
+							i.icon-user.icon-white.padding-top
+							|  MyAccount
+							span.caret
+							ul.dropdown-menu(role='menu')
+								li
+									a(href='/user/MyAccount') Account Settings
+								li.divider
+								li
+									a#btn-logout(href="#") Log Out

@@ -1,0 +1,40 @@
+!!! 5
+html
+	head
+		title CineMatch
+		link(rel='stylesheet', href='/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
+		link(rel='stylesheet', href='/css/style.css')
+		link(rel='stylesheet', href='/css/slider.css')
+		script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js")
+		script(src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js")
+		script(src='/vendor/bootstrap.min.js')
+		script(type='text/javascript')
+		script(src='http://darsa.in/sly/js/vendor/modernizr.js')
+		script(src='http://jqueryui.com/jquery-wp-content/themes/jquery/css/base.css?v=1')
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-1890531-10']);
+			_gaq.push(['_setDomainName', 'braitsch.io']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+	//- HT BODY //
+	body
+			//-If User is logged in load sidebar //
+			- if (typeof udata !== 'undefined')
+				//- Load Block Content
+				block content
+
+				//-If user is not logged in
+			- else
+				script
+					document.body.style.backgroundImage = "url('/img/background.jpg')";
+				//- Load Block Content
+				block content
+
+block scripts

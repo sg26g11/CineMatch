@@ -1,0 +1,286 @@
+
+extends layout
+
+block content
+	include navbar
+	include modals/alert
+
+	-if (user.user == udata.user)
+		script
+			$('#profile').addClass('active');
+
+	div#profile-container.grey.divborder
+		div.container-fluid
+			div.row-fluid
+					div.top-padding
+					//- If user is no their profile show match request box //
+					-if (user.user !== udata.user)
+						div.inner-div
+							div.match-request-container
+								div.white
+									div.inner-div
+										div.center
+										//- Request buttons //
+										div#matchRequest(style="display:none;")
+											h4 Want to chat to #{user.user}? Send a match request now!
+											br
+											button(type='button', value=user.user)#matchRequestButton.btn.btn-primary
+												i.icon-heart.icon-white
+												|  Send match request!
+
+										div#requestSent(style="display:none;")
+											h4 You will be notified when #{user.user} approves your request.
+											br
+											button(type='button').btn.btn-success
+												i.icon-ok.icon-white
+												|  Request Sent
+
+										div#requestReceived(style="display:none;")
+											h4 Lucky you!
+											br
+											a(href="/"+udata.user+'/MyMatches')
+												button(type='button', value=user.user).btn.btn-primary
+													i.icon-envelope.icon-white
+													|  This user has sent you a match request!
+												button(type='button', value=user.user)#AcceptRequest.btn.btn-success
+													i.icon-ok.icon-white
+													| Accept
+												button(type='button', class="DeclineRequest", value=user.user).btn.btn-default
+													i.icon-remove.icon-black
+													| Decline
+										div(style="display:none;", class="declined")
+											button(type='button').btn.btn-default
+												i.icon-ok.icon-black
+												| You declined the request
+
+										div#matched(style="display:none;")
+											p You are both matched! :)
+											a(href="/#{udata.user}/MyMessages/#{user.user}")
+												button(type='button').btn.btn-primary
+													i.icon-envelope.icon-white
+													|  Open Chat
+										-var buttonshown = false
+										-if (allRequests.length > 0)
+											-for (var i = 0; i < allRequests.length; i++)
+												-if (allRequests[i].receiver == user.user)
+														-if (allRequests[i].accepted == true)
+															-var buttonshown = true
+															script
+																$('#matched').show();
+														-else if (allRequests[i].sender == true)
+															-var buttonshown = true
+															script
+																$('#requestSent').show();
+														-else if (allRequests[i].sender == false)
+															-var buttonshown = true
+															script
+																$('#requestReceived').show();
+										-if (buttonshown!==true)
+											script
+												$('#matchRequest').show();
+
+						hr
+
+					//- Profile information container //
+					div.profile-info-container
+						div.white
+							div.inner-div
+								div.center
+									br
+									h1 #{user.name}
+									hr
+									p	Age:
+									p.bold #{user.age}
+									p	Gender:
+									p.bold #{user.gender}
+									p Interested in:
+									p.bold #{user.preference}
+									p Height:
+									p.bold #{user.height}
+									p Body Type:
+									p.bold #{user.bodyType}
+									p Location:
+									p.bold #{user.cinema}
+									hr
+								p.bold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Me:
+								p #{user.bio}
+								//- If user is on their profile //
+								-if (user.user == udata.user)
+									.form-actions.center
+										a(href="/"+user.user+"/edit-profile")
+											button(type='button').btn.btn-primary
+												i.icon-pencil.icon-white
+												|  Edit Profile
+
+					//- Photos Container //
+					div.profile-photo-container.white
+						div.center.pull-left
+							br
+							a(href="#")
+								popup
+									img(src="/img/userPhotos/thumbs/" + user.profilePhoto, alt="img", width="88%").glow.pop
+							-for (var i = 1; i < photos.length; i++)
+								-if (i < 5)
+									a(href="#")
+										popup
+											img(src="/img/userPhotos/thumbs/#{photos[i].name}", alt="img", width="40%").glow.pop
+
+							div.center
+								//- If user is on their profile //
+								-if (user.user == udata.user)
+									.form-actions
+										a(href="/" + udata.user + "/MyPhotos")
+											button(type='button')#photos.btn.btn-primary
+												i.icon-picture.icon-white
+												|  View Photos
+									//- User is on another user's profile //
+								-else
+									a(href="/" + user.user + "/MyPhotos")
+										button(type='button')#photos.btn.btn-primary
+											i.icon-picture.icon-white
+											|  View Photos
+									p
+					-if (user._id == udata._id)
+						div.film-container.white
+							div.center
+								div.inner-div
+									//- If user has matches //
+									-if (acceptedRequests.length > 0)
+										-if (acceptedRequests.length == 1)
+											h2 You have #{acceptedRequests.length} Match:
+											a(href="/" + user.user + "/MyMatches")
+												button(type='button')#photos.btn.btn-primary
+													i.icon-heart.icon-white
+													|  View Matches
+										-else
+											h2 You have #{acceptedRequests.length} Matches:
+											a(href="/" + user.user + "/MyMatches")
+												button(type='button')#photos.btn.btn-primary
+													i.icon-heart.icon-white
+													|  View Matches
+
+										p
+										//- Matches slider
+										div.scrollbar
+											div.handle
+												div.mousearea
+										div.frame#centered
+											ul.clearfix
+												//- Print out each match //
+												-for (var i = 0; i < acceptedRequests.length; i++)
+													li.white.glow
+														div
+															br
+															a(href="/#{acceptedRequests[i].user}")
+																-var name = acceptedRequests[i].name
+																-if (name.length > 20) name = name.substring(0,20)+"..";
+																p.large #{name}
+																img(src="/img/userPhotos/thumbs/" + acceptedRequests[i].profilePhoto, alt="img", width="88%").glow
+														br
+
+										.form-actions
+											ul.pages
+											div.controls.center
+												button.btn.prevPage
+													i.icon-chevron-left
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												button.btn.nextPage
+													i.icon-chevron-right
+									-else
+										h2 You have no matches yet!
+										p
+										p If you find someone you like the look of, send them a match request and get chatting!
+										a(href="/" + user.user + "/CineMatches/1")
+											button(type='button').btn.btn-primary
+												i.icon-heart.icon-white
+												|  Find Matches Now!
+
+					//- Films Container //
+					div.film-container.white
+						div.center
+							div.inner-div
+								//- If user is on their profile //
+								-if (user._id == udata._id)
+									-if (myfilms.length == 1)
+										h2 You have #{myfilms.length} film at #{udata.cinema}:
+										hr
+									-else
+										h2 You have #{myfilms.length} films at #{udata.cinema}:
+										//- If user has no films //
+										-if (myfilms.length == 0)
+											p You have no films yet!
+											p To match better with our users, please consider adding films!
+											.form-actions
+												a(href="/")
+													button(type='submit').btn.btn-primary
+														i.icon-plus.icon-white
+														|  Add Films Now!
+										-if (myfilms.length > 0)
+											br
+											a(href="/" + user.user + "/MyFilms")
+												button(type='button')#photos.btn.btn-primary
+													i.icon-film.icon-white
+													|  View and Edit Films
+									//- If user is NOT on their profile //
+								-else
+									-if (myfilms.length == 1)
+										h2 #{user.name} has #{myfilms.length} film at #{user.cinema}:
+									-else
+										-if (myfilms.length == 0)
+											h2 #{user.name} has no films at #{user.cinema} yet
+											p :(
+										-else
+											h2 #{user.name} has #{myfilms.length} films at #{user.cinema}:
+										-if (myfilms.length > 0)
+											br
+											a(href="/" + user.user + "/MyFilms")
+												button(type='button')#photos.btn.btn-primary
+													i.icon-film.icon-white
+													|  View All Films
+
+								//- If user has films //
+								-if (myfilms.length > 0)
+									p
+									//- Film Slider
+									div.scrollbar
+										div.handle
+											div.mousearea
+									div.frame#cyclepages
+										ul.clearfix
+											//- Print out each film //
+											-for (var i = 0; i < myfilms.length; i++)
+												li.white.glow
+													div.inner-div
+														div.titlecontainer
+															a(href="/film/"+ myfilms[i].edi)
+																//- limit film title length to fit on tile //
+																-var title = myfilms[i].title
+																-if(title.length > 30) title = title.substring(0,30)+"..";
+																p #{title}
+														hr
+														div.image
+															//- Edit poster url to get higher resolution image //
+															-var removejpg = myfilms[i].poster.slice(0, -4);
+															a(href="/film/" + myfilms[i].edi)
+																img(src="http://www.cineworld.co.uk" + removejpg + '_iphone.jpg', alt="img", width="100%")
+									.form-actions
+										ul.pages
+										div.controls.center
+											button.btn.prevPage
+												i.icon-chevron-left
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											button.btn.nextPage
+												i.icon-chevron-right
+
+block scripts
+	script(src='https://raw.githubusercontent.com/darsain/sly/master/dist/sly.js')
+	script(src='http://darsa.in/sly/examples/js/vendor/plugins.js')
+	script(src='http://darsa.in/sly/js/sly.min.js')
+	script(src='http://darsa.in/sly/examples/js/horizontal.js')
+	script(src='/vendor/jquery.min.js')
+	script(src='/vendor/jquery.form.js')
+	script(src='/vendor/bootstrap-modal.js')
+	script(src='/vendor/bootstrap-transition.js')
+	script(src='/js/views/profile.js')
+	script(src='/js/controllers/profileController.js')
+	script(src='/js/controllers/accountController.js')

@@ -1,0 +1,82 @@
+
+extends layout
+
+block content
+
+	//-display form errors in a custom modal window //
+	include modals/form-errors
+	include modals/alert
+
+	//-preset form values if we receive a userdata object //
+	- user = typeof(udata) != 'undefined' ? udata : { }
+	//-store the userId on the client side in a hidden input field //
+	input(type='hidden', value= user._id)#userId
+
+	#form-container
+				form( method="post")#account-form.form-horizontal.well
+					h1.center
+					hr
+					h8.bold Full Name:
+					#name-cg.control-group
+						label.control-label(for='name-tf')
+							input#name-tf.input-xlarge(type='text', name='name', value= user.name)
+
+					h8.bold Age:
+					#age-cg.control-group
+						label.control-label(for='age-tf')
+							select#age-tf.input-medium(name='age')
+								option='Please Select..'
+								each item in agelist
+									option= item.name
+
+					h8.bold Gender:
+					#gender-cg.control-group
+						label.control-label(for='gender-tf')
+							select#gender-tf.input-medium(name='gender')
+								each item in genders
+									option= item.name
+
+					h8.bold I'm interested in:
+					#preference-cg.control-group
+						label.control-label(for='preference-tf')
+							select#preference-tf.input-medium(name='preference')
+								each item in preferences
+									option= item.name
+
+					h8.bold Local Cinema:
+					#cinema-cg.control-group
+						label.control-label(for='cinema-tf')
+							select#cinema-tf(name='cinema')
+								option='Please Select..'
+								each item in cinemas
+									option(value=item.CinemaID)= item.name
+
+
+					h8.bold Email Address:
+					#email-cg.control-group
+						label.control-label(for='email-tf')
+							input#email-tf.input-xlarge(type='text', name='email', value= user.email)
+
+					h8.bold Username:
+					#user-cg.control-group
+						label.control-label(for='user-tf')
+							input#user-tf.input-xlarge.disabled(type='text', name='user', value= user.user)
+
+					h8.bold Password:
+					#pass-cg.control-group
+						label.control-label(for='pass-tf')
+							input#pass-tf.input-xlarge(type='password', name='pass', value='')
+
+					.form-actions
+						button(type='button')#account-form-btn1.btn
+						button(type='submit')#account-form-btn2.btn
+
+block scripts
+	script(src='/vendor/jquery.min.js')
+	script(src='/vendor/jquery.form.js')
+	script(src='/vendor/bootstrap-modal.js')
+	script(src='/vendor/bootstrap-transition.js')
+	script(src='/js/views/signup.js')
+	script(src='/js/controllers/signupController.js')
+	script(src='/js/controllers/accountController.js')
+	script(src='/js/form-validators/accountValidator.js')

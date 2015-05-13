@@ -1,0 +1,198 @@
+
+extends layout
+
+block content
+	include navbar
+
+	script
+		$('#myLinks').addClass('active');
+
+	div#profile-container.grey.divborder
+		div.container-fluid
+		-if (user.user == udata.user)
+			div.row-fluid
+				div.top-padding
+				div.film-container.white
+					div.inner-div.center
+						h2 MyMessages:
+						-if (matches.length == 0)
+							p You must be matched to users before you can send messages!
+							a(href="/"+udata.user+"/CineMatches/1")
+								button.btn.btn-primary
+									| Find matches now!
+
+		-if (user.user !== udata.user || messageSessions.length > 0)
+			div.container-fluid
+				div.row-fluid
+					//- user is viewing all messages //
+					-if (user.user == udata.user)
+						div#chatSessionContainer.well
+							-for (var i = 0; i < messageSessions.length; i++)
+								div.well(id="messageWindow", value=messageSessions[i].name, class=udata.user)
+									div.inner-div
+										-if (messageNotifications.indexOf(messageSessions[i].name) !== -1)
+											p.orange.bold New!
+										a(href="/"+udata.user+"/MyMessages/"+messageSessions[i].name)
+											p #{messageSessions[i].name}
+										div.white
+											div.inner-div
+												-if (messageSessions[i].lastSender == udata.user)
+													p	You: #{messageSessions[i].lastMsg}
+												-else
+													p	#{messageSessions[i].name}: #{messageSessions[i].lastMsg}
+										br
+										a(href="/"+udata.user+"/MyMessages/"+messageSessions[i].name)
+											button.btn.btn-primary.center
+												| Open Chat
+
+					-else
+						div.top-padding
+						div.film-container.white
+							div.inner-div
+								//- If users are matched //
+								-if (matched == true)
+									a(href="/"+user.user)
+										img(src="/img/userPhotos/thumbs/" + user.profilePhoto, alt="img", width="10%").glow.pull-left
+									br
+									div#online(style="display: none;")
+										p #{user.user} is online!
+									div#offline
+										p #{user.user} is offline.
+									p Your chat with #{user.user}:
+									div#chat.well
+									form#send-message.center
+										input.input-large(size=35, id="message")
+										button(type="submit").btn.btn-primary
+											| Send
+								-else
+									p You must be matched with #{user.user} before you can send a message.
+									a(href="/"+user.user)
+										button.btn.btn-primary
+											| Visit their profile
+
+		-if (matches.length > 0)
+			div.container-fluid
+				div.row-fluid
+					div.top-padding
+					div.film-container.white
+						div.inner-div.center
+							p You can start a new chat session with any of your matches
+							a(href="/"+udata.user+"/MyMatches")
+								button.btn.btn-primary
+									i.icon-heart.icon-white
+									| View MyMatches
+
+	script
+		sender="#{udata.user}";
+		senderSocketNickname="#{udata.user}"+"#{user.user}";
+		receiver="#{user.user}";
+		receiverSocketNickname="#{user.user}"+"#{udata.user}";
+
+		jQuery(function($){
+			//- Emit user connection //
+			var socket = io.connect();
+			var connectedUser = socket.emit('user connect',
+			{sender: sender, receiver: receiver, senderSocketNickname: senderSocketNickname,
+			receiverSocketNickname: receiverSocketNickname} );
+
+			var $messageForm = $('#send-message');
+			var $messageBox = $('#message');
+			var $chat = $('#chat');
+
+			//- Send message on form submit //
+			$messageForm.submit(function(e){
+				e.preventDefault();
+				//- If messageBox is not blank //
+				if ($messageBox.val() !== ''){
+					socket.emit('send message',
+						{sender: sender, senderSocketNickname: senderSocketNickname, receiver: receiver, receiverSocketNickname: receiverSocketNickname, msg: $messageBox.val()
+					});
+					$messageBox.val('');
+				}
+			});
+
+			//- print chat history
+			socket.on('chat history', function(data){
+				//- Set maximum number of messages displayed //
+				var chatHistoryLength = 25;
+				if (data.length < chatHistoryLength) {
+					chatHistoryLength = data.length;
+				}
+				for (var i = data.length - chatHistoryLength; i < data.length; i++){
+					//- create div for message //
+					var div = document.createElement('div');
+					div.setAttribute('class', 'well');
+					div.align = 'right';
+					//- set appropriate name //
+					if (data[i].sender == sender) {
+						data[i].sender = 'You'
+						div.align = 'left';
+						//- add message to div //
+						div.innerHTML = "<a href='/"+sender+"'>"+data[i].sender+":</a><br/>" + data[i].msg+"<br/>";
+					}
+					else {
+						div.style.background = '#F2F5FF';
+						//- add message to div //
+						div.innerHTML = "<a href='/"+data[i].sender+"'>"+data[i].sender+":</a><br/>" + data[i].msg+"<br/>";
+					}
+
+					//- add the message to chat window //
+					$chat.append(div);
+
+					//- keep scroll bar set at the bottom of div //
+					$("#chat").scrollTop($("#chat")[0].scrollHeight);
+				}
+			});
+
+			//- Deal with incoming messages//
+			socket.on('new message', function(data){
+				//- create div for message //
+				var div = document.createElement('div');
+				div.setAttribute('class', 'well');
+				div.align = 'right';
+				//- set appropriate name //
+				if (data.sender == sender) {
+					data.sender = 'You'
+					div.align = 'left';
+					//- add message to div //
+					div.innerHTML = "<a href='/"+sender+"'>"+data.sender+":</a><br/>" + data.msg+"<br/>";
+				}
+				else {
+					div.style.background = '#F2F5FF';
+					//- add message to div //
+					div.innerHTML = "<a href='/"+data.sender+"'>"+data.sender+":</a><br/>" + data.msg+"<br/>";
+				}
+
+				//- add message to chat window //
+				$chat.append(div);
+
+				//- keep scroll bar set at the bottom of div //
+				$("#chat").scrollTop($("#chat")[0].scrollHeight);
+			});
+
+			//- Update online status //
+			socket.on('online', function(data){
+				$('#online').show();
+				$('#offline').hide();
+			});
+
+			//- Update offline status //
+			socket.on('offline', function(data){
+				$('#offline').show();
+				$('#online').hide();
+			});
+		});
+
+block scripts
+	script(src='/vendor/socket.io.js')
+	script(src='https://raw.githubusercontent.com/darsain/sly/master/dist/sly.js')
+	script(src='http://darsa.in/sly/examples/js/vendor/plugins.js')
+	script(src='http://darsa.in/sly/js/sly.min.js')
+	script(src='http://darsa.in/sly/examples/js/horizontal.js')
+	script(src='/vendor/jquery.min.js')
+	script(src='/vendor/jquery.form.js')
+	script(src='/vendor/bootstrap-modal.js')
+	script(src='/vendor/bootstrap-transition.js')
+	script(src='/js/views/MyMatches.js')
+	script(src='/js/controllers/profileController.js')
+	script(src='/js/controllers/accountController.js')

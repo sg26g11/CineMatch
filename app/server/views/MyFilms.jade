@@ -1,0 +1,81 @@
+
+extends layout
+
+block content
+	include navbar
+	include modals/alert
+	include modals/confirm
+
+	-if (user.user == udata.user)
+		script
+			$('#myLinks').addClass('active');
+	div#profile-container.grey.divborder
+			div.container-fluid
+				div.row-fluid
+						div.top-padding
+						//- Films Container //
+						div.white.film-container
+							div.inner-div
+								//- If user is on their profile //
+								-if (user._id == udata._id)
+									-if (myfilms.length == 1)
+										h2.center You have #{myfilms.length} film at #{udata.cinema}:
+									-else
+										h2.center You have #{myfilms.length} films at #{udata.cinema}:
+										//- If user has no films //
+										-if (myfilms.length == 0)
+											p You have no films yet!
+											p To match better with our users, please consider adding films!
+											.form-actions
+												a(href="/")
+													button(type='submit').btn.btn-primary
+														i.icon-plus.icon-white
+														|  Add Films Now!
+										hr
+									//- If user is NOT on their profile //
+								-else
+									-if (myfilms.length == 1)
+										h2 #{user.name} wants to watch #{myfilms.length} film at #{user.cinema}:
+									-else
+										h2 #{user.name} wants to watch #{myfilms.length} films at #{user.cinema}:
+										-if (myfilms.length == 0)
+											p This user has no films yet!
+										hr
+
+								//- If user has films //
+								-if (myfilms.length > 0)
+									div.center
+										//- Print out each film tile //
+										-for (var i = 0; i < myfilms.length; i++)
+												div.filmtile.center.white
+													div.titlecontainer
+														P
+															a(href="/film/"+ myfilms[i].edi)
+																//- limit film title length to fit on tile //
+																-var title = myfilms[i].title
+																-if(title.length > 47) title = title.substring(0,47)+"..";
+																p #{title}
+													hr
+
+													a(href="/film/" + myfilms[i].edi).pull-bottom
+														div.image
+															//- Edit poster url to get higher resolution image //
+															-var removejpg = myfilms[i].poster.slice(0, -4);
+																img(src="http://www.cineworld.co.uk" + removejpg + '_iphone.jpg', alt="img", width="90%").glow
+
+													-if (user._id == udata._id)
+														p
+														a(href="/remove-film/" + myfilms[i].edi)
+															button(type='submit').btn
+																i.icon-remove.icon-black
+																|  Remove
+													P
+
+block scripts
+	script(src='/vendor/jquery.min.js')
+	script(src='/vendor/jquery.form.js')
+	script(src='/vendor/bootstrap-modal.js')
+	script(src='/vendor/bootstrap-transition.js')
+	script(src='/js/views/profile.js')
+	script(src='/js/controllers/accountController.js')
+	script(src='/js/controllers/profileController.js')
